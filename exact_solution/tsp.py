@@ -1,5 +1,12 @@
 import itertools
 
+"""
+name: Cal Fitzgerald
+Honor Code and Acknowledgments:
+This work complies with the JMU Honor Code.
+Comments here on your code and submission.
+"""
+
 
 def parse_input(input_data):
     n, m = map(int, input_data[0].split())
