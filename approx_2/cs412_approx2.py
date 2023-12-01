@@ -8,7 +8,16 @@
 
 
 def approxing(G, currVert):
-    pass
+    visited = set()
+
+    current_vertex = currVert
+
+    tour = [current_vertex]
+
+    while len(visited) < len(G):
+        visited.add(current_vertex)
+
+    return tour
 
 
 def main():
