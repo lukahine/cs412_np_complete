@@ -15,7 +15,8 @@ def approxing(G, currVert):
             minVal = min(G[currVert].values())
             print("The min value in this group is " + str(minVal))
         print(visited)
-        visited.append(list(G[currVert].values()).index(minVal))
+        keys = list(G[currVert].keys())
+        visited.append(keys[list(G[currVert].values()).index(minVal)])
     
 
 def main():
