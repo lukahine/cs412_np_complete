@@ -9,14 +9,20 @@ import random
 
 def approxing(G, currVert):
     visited = [currVert]
+    totalLength = 0
+    theVert = currVert
     minVal = 0
-    while (len(visited) <= len(G)):
-        for edge in G[currVert]:
-            minVal = min(G[currVert].values())
-            print("The min value in this group is " + str(minVal))
+    while (len(visited) < len(G)):
+        for edge in G[theVert]:
+            minVal = min(G[theVert].values())
+            totalLength += minVal
         print(visited)
-        keys = list(G[currVert].keys())
-        visited.append(keys[list(G[currVert].values()).index(minVal)])
+        keys = list(G[theVert].keys())
+        visited.append(keys[list(G[theVert].values()).index(minVal)])
+        theVert = visited[len(visited) - 1]
+    print(totalLength)
+    visited.append(visited[0])
+    print(visited)
     
 
 def main():
