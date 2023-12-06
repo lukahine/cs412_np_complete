@@ -12,16 +12,18 @@ def approxing(G, currVert):
     totalLength = 0
     theVert = currVert
     minVal = 0
-    while (len(visited) < len(G)):
+    while (len(visited) <= len(G)):
         for edge in G[theVert]:
             minVal = min(G[theVert].values())
-            totalLength += minVal
+        totalLength += minVal
         print(visited)
         keys = list(G[theVert].keys())
         visited.append(keys[list(G[theVert].values()).index(minVal)])
+        del G[theVert][visited[len(visited) - 1]]
         theVert = visited[len(visited) - 1]
+        del G[theVert][visited[len(visited)- 2]]
     print(totalLength)
-    visited.append(visited[0])
+    #visited.append(visited[0])
     print(visited)
     
 
@@ -47,7 +49,6 @@ def main():
     randomVertex = listForRandom[random.randint(0, len(G) - 1)]
 
     approxing(G, randomVertex)
-    print(G)
 
 if __name__ == "__main__":
     main()
