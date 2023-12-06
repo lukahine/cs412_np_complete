@@ -11,36 +11,26 @@ def approxing(G, currVert):
     visited = [currVert]
     totalLength = 0
     theVert = currVert
-    while (len(visited) <= len(G)):
-        minVal = 9999999
+    while len(visited) < len(G):
+        minVal = 9999999  # High value to prevent having to constantly cast to int from float.
         for edge in G[theVert]:
-            print("the edge that is being checked into visited = " + str(edge))
-            if str(edge) not in visited: # Should only allow edges that don't have end vertex in Visited.
-                print(visited)
-                print("the edge that made it through = " + str(edge))
-                print(G[theVert][edge])
-                minVal = min(minVal, G[theVert][edge])
-                print("The Minimum value is = " + str(minVal))
-        if len(visited) == len(G):
-            minVal = G[theVert][visited[0]]
+            if edge not in visited:
+                minVal = min(minVal, G[theVert][edge])  # ensures minVal and nextVert are valid
+                nextVert = edge if G[theVert][edge] == minVal else nextVert 
+
         totalLength += minVal
-        keys = list(G[theVert].keys())
-        print("The keys are below")
-        print(keys)
-        print("the Min val is = " + str(minVal))
-        print(list(G[theVert].values()).index(minVal))
-        visited.append(list(G[theVert].keys())[list(G[theVert].values()).index(minVal)])
-        #del G[theVert][visited[len(visited) - 1]]
-        theVert = (list(G[theVert].keys())[list(G[theVert].values()).index(minVal)]) # gets the new vertex being that of the key with the minVal
-        print("TheVert = " + str(theVert))
-        print(visited)
-        #del G[theVert][visited[len(visited)- 2]]
+        theVert = nextVert
+        visited.append(theVert)
+
+    # Add the distance back to the starting vertex
+    totalLength += G[theVert][currVert]
+    visited.append(currVert)
+
     print(totalLength)
-    #visited.append(visited[0])
     print(str(visited[0]), end = "")
     visited.pop(0)
     for item in visited:
-        print(" " + str(item), end = "")
+        print(" " + str(item), end="")
     print()
     
 
