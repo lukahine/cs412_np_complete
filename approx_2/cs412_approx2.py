@@ -4,18 +4,24 @@
         This work complies with the JMU Honor Code.
 
         Comments
+            Christofides Algorithm Video - SaucelessGiuseppe
+                https://www.youtube.com/watch?v=dNCwtFJLsKI
 """
 
 import networkx as nx
 
+
 def minimum_spanning_tree(graph):
     return nx.minimum_spanning_tree(graph)
+
 
 def minimum_weight_perfect_matching(odd_vertices, graph):
     return nx.max_weight_matching(graph, maxcardinality=False)
 
+
 def eulerian_circuit(graph):
     return list(nx.eulerian_circuit(graph))
+
 
 def shortcut_eulerian_circuit(eulerian_circuit):
     visited = set()
@@ -27,12 +33,10 @@ def shortcut_eulerian_circuit(eulerian_circuit):
                 hamiltonian_circuit.append(vertex)
                 visited.add(vertex)
 
-    # Ensure the circuit is closed
     if hamiltonian_circuit[0] != hamiltonian_circuit[-1]:
         hamiltonian_circuit.append(hamiltonian_circuit[0])
 
     return hamiltonian_circuit
-
 
 
 def christofides_algorithm(graph):
@@ -40,6 +44,7 @@ def christofides_algorithm(graph):
     mst = minimum_spanning_tree(graph)
 
     # Step 2: Minimum Weight Perfect Matching for Odd-Degree Vertices
+    # Algorithm was written expecting an incomplete connected graph, so the odd degree vertices doesn't really matter here
     odd_degree_vertices = [v for v, d in mst.degree if d % 2 == 1]
     perfect_matching = minimum_weight_perfect_matching(odd_degree_vertices, graph)
 
@@ -49,8 +54,9 @@ def christofides_algorithm(graph):
 
     # Make sure the multigraph is Eulerian
     if not nx.is_eulerian(multigraph):
-        # Find nodes with odd degree in the multigraph
-        odd_degree_nodes = [node for node, degree in multigraph.degree() if degree % 2 == 1]
+        odd_degree_nodes = [
+            node for node, degree in multigraph.degree() if degree % 2 == 1
+        ]
         for i in range(0, len(odd_degree_nodes), 2):
             multigraph.add_edge(odd_degree_nodes[i], odd_degree_nodes[i + 1])
 
@@ -75,10 +81,14 @@ def main():
     hamiltonian_circuit = christofides_algorithm(G)
 
     # Calculate total cost
-    total_cost = sum(G[hamiltonian_circuit[i]][hamiltonian_circuit[i + 1]]['weight'] for i in range(len(hamiltonian_circuit) - 1))
+    total_cost = sum(
+        G[hamiltonian_circuit[i]][hamiltonian_circuit[i + 1]]["weight"]
+        for i in range(len(hamiltonian_circuit) - 1)
+    )
 
     print(total_cost)
-    print(' '.join(map(str, hamiltonian_circuit)))
+    print(" ".join(map(str, hamiltonian_circuit)))
+
 
 if __name__ == "__main__":
     main()
