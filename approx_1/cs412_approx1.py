@@ -11,20 +11,37 @@ def approxing(G, currVert):
     visited = [currVert]
     totalLength = 0
     theVert = currVert
-    minVal = 0
     while (len(visited) <= len(G)):
+        minVal = 9999999
         for edge in G[theVert]:
-            minVal = min(G[theVert].values())
+            print("the edge that is being checked into visited = " + str(edge))
+            if str(edge) not in visited: # Should only allow edges that don't have end vertex in Visited.
+                print(visited)
+                print("the edge that made it through = " + str(edge))
+                print(G[theVert][edge])
+                minVal = min(minVal, G[theVert][edge])
+                print("The Minimum value is = " + str(minVal))
+        if len(visited) == len(G):
+            minVal = G[theVert][visited[0]]
         totalLength += minVal
-        print(visited)
         keys = list(G[theVert].keys())
-        visited.append(keys[list(G[theVert].values()).index(minVal)])
-        del G[theVert][visited[len(visited) - 1]]
-        theVert = visited[len(visited) - 1]
-        del G[theVert][visited[len(visited)- 2]]
+        print("The keys are below")
+        print(keys)
+        print("the Min val is = " + str(minVal))
+        print(list(G[theVert].values()).index(minVal))
+        visited.append(list(G[theVert].keys())[list(G[theVert].values()).index(minVal)])
+        #del G[theVert][visited[len(visited) - 1]]
+        theVert = (list(G[theVert].keys())[list(G[theVert].values()).index(minVal)]) # gets the new vertex being that of the key with the minVal
+        print("TheVert = " + str(theVert))
+        print(visited)
+        #del G[theVert][visited[len(visited)- 2]]
     print(totalLength)
     #visited.append(visited[0])
-    print(visited)
+    print(str(visited[0]), end = "")
+    visited.pop(0)
+    for item in visited:
+        print(" " + str(item), end = "")
+    print()
     
 
 def main():
