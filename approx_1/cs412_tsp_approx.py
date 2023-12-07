@@ -26,7 +26,7 @@ def approxing(G, currVert):
     totalLength += G[theVert][currVert]
     visited.append(currVert)
 
-    print("%0.4f"% totalLength)
+    print(totalLength)
     print(str(visited[0]), end = "")
     visited.pop(0)
     for item in visited:
