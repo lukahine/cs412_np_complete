@@ -1,0 +1,9 @@
+Discussion Points for the Nearest Neighbor Approximation Algorithm
+
+1. Explain Strategy: The Strategy I used is Nearest Neighbor which is a greedy algorithm.
+        It is not only greedy due to my incorporation of a random selection for initial vertex.
+        This randomness has no restrictions, only that it must be a vertex in the graph.
+
+2. Analytical runtime Analysis: The Nearest Neighbor algorithm runs in O(V^2) which is because
+        of how it needs to go through each vertex and each edge of that vertex to find
+        the shortest outgoing edge to use that does not lead to a vertex already in visited.
