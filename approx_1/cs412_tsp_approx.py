@@ -26,7 +26,7 @@ def approxing(G, currVert):
     totalLength += G[theVert][currVert]
     visited.append(currVert)
 
-    print(totalLength)
+    print("%0.4f"% totalLength)
     print(str(visited[0]), end = "")
     visited.pop(0)
     for item in visited:
@@ -43,14 +43,14 @@ def main():
         theInput = input().split()
         u = theInput[0]
         v = theInput[1]
-        w = int(theInput[2])
+        w = float(theInput[2])
         if (u not in G):
             G[u] = {}
             listForRandom.append(u)
         if (v not in G):
             G[v] = {}
             listForRandom.append(v)
-        w = int(w)
+        w = float(w)
         G[u][v] = w
         G[v][u] = w
     randomVertex = listForRandom[random.randint(0, len(G) - 1)]
