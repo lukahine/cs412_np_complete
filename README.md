@@ -1,3 +1,3 @@
 # cs412_np_complete
 CS412 Fall 2023 JMU Molloy
-thank you for reading
+There will be README files in each directory that will be more helpful
