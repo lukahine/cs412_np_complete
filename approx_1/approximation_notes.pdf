@@ -7,3 +7,15 @@ Discussion Points for the Nearest Neighbor Approximation Algorithm
 2. Analytical runtime Analysis: The Nearest Neighbor algorithm runs in O(V^2) which is because
         of how it needs to go through each vertex and each edge of that vertex to find
         the shortest outgoing edge to use that does not lead to a vertex already in visited.
+
+
+
+Test Cases and Optimality
+Test 1: Always achieves optimal solution given the fact that since each vertex has 2 edges, both edges will always be used,
+        Regardless of starting vertex.
+Test 2: Will sometimes achieve optimal solution, due to multiple ways to get to the optimal value through different paths
+        and starting vertices.
+Test 3: Will not achieve optimal solution given that starting from A will go to the smallest edge attached to A, which 
+        should not be taken to find optimal path from A.
+Test 4: Same explanation as Test 3.
+Test 5: Same explanation as Test 3.
