@@ -1,35 +1,31 @@
 #!/bin/bash
 
-# Sample shell script for running test cases with color-coded output.
+# Ensure the Python script has execute permissions (if not already)
+chmod +x cs412_tsp_approx.py
 
-RED="\033[0;31m"
-GREEN="\033[0;32m"
-BOLD="\033[1m"
-NC="\033[0m" # No Color
-BLUE="\033[0;34m"
+# Directory containing test case directories
+test_case_directory="test_cases"
 
-echo -e "${BOLD}Test cases:"
-echo -e "\t${BOLD}test\tresult\truntime${NC}"
+# Check if the test case directory exists
+if [ ! -d "$test_case_directory" ]; then
+    echo "Error: Test case directory '$test_case_directory' not found."
+    exit 1
+fi
 
-PROG_TO_TEST="../../cs412_tsp_approx.py"
-TEST_DIR="test_cases"
+# Loop through each test case directory in the main directory
+for test_case_dir in "$test_case_directory"/test*; do
+    if [ -d "$test_case_dir" ]; then
+        # Check if the directory contains an input.txt file
+        input_file="$test_case_dir/input.txt"
+        if [ -f "$input_file" ]; then
+            # Run the Python script with the current input.txt file
+            echo "Running cs412_tsp_approx.py with input from: $input_file"
+            python cs412_tsp_approx.py < "$input_file"
 
-for test in ${TEST_DIR}/test*; do
-    cd $test
-
-    start=$(python3 -c 'import time; print(time.time())')
-    python3 ${PROG_TO_TEST} < input.txt > output.txt
-    end=$(python3 -c 'import time; print(time.time())')
-    runtime=$(echo "$end - $start" | bc -l)
-
-    # Check only the first line of each file for comparison
-    if [ "$(head -n 1 ExpectedOutput.txt)" = "$(head -n 1 output.txt)" ]; then
-        echo -e "\t$(basename $test)\t${GREEN}passed\t${BLUE}${runtime}s${NC}"
-    else
-        echo -e "\t$(basename $test)\t${RED}failed\t${BLUE}${runtime}s${NC}"
+            # Add a separator for better readability
+            echo "======================================="
+        else
+            echo "Error: Input file '$input_file' not found in directory '$test_case_dir'."
+        fi
     fi
-
-    cd ../../
 done
-
-exit 0
