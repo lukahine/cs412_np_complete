@@ -18,14 +18,9 @@ for test_case_dir in "$test_case_directory"/test*; do
         # Check if the directory contains an input.txt file
         input_file="$test_case_dir/input.txt"
         if [ -f "$input_file" ]; then
-            # Time the runtime of the algorithm
-            start=$(python -c 'import time; print(time.time())')
-            python cs412_tsp_approx.py < "$input_file" > "$test_case_dir/output.txt"
-            end=$(python -c 'import time; print(time.time())')
-
-            # Calculate and display the runtime
-            runtime=$(echo "$end - $start" | bc)
-            echo "Runtime for cs412_tsp_approx.py with input from $input_file: $runtime seconds"
+            # Run the Python script with the current input.txt file
+            echo "Running cs412_tsp_approx.py with input from: $input_file"
+            python cs412_tsp_approx.py < "$input_file"
 
             # Add a separator for better readability
             echo "======================================="
