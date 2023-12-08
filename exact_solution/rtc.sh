@@ -23,6 +23,7 @@ for test in ${TEST_DIR}/test*; do
     runtime=$(echo "$end - $start" | bc -l)
 
     # Check only the first line of each file for comparison
+    # This runs all tests but test 5 takes longer than 20 minutes
     if [ "$(head -n 1 ExpectedOutput.txt)" = "$(head -n 1 output.txt)" ]; then
         echo -e "\t$(basename $test)\t${GREEN}passed\t${BLUE}${runtime}s${NC}"
     else
